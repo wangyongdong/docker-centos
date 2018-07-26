@@ -1,0 +1,59 @@
+version: '3'
+services:
+  redis:
+      build: ./redis
+      ports:
+        - "36379:6379"
+      volumes:
+        - $HOME/docker-box/mount-data/docker-centos/redis/data:/data
+        - $HOME/docker-box/mount-data/docker-centos/redis/conf/redis.conf:/usr/local/redis/conf/redis.conf
+      restart: always
+      container_name: redis
+
+  mysql:
+      depends_on:
+        - redis
+      build: ./mysql
+      ports:
+        - "33306:3306"
+      volumes:
+        - $HOME/docker-box/mount-data/docker-centos/mysql/data:/var/lib/mysql
+        - $HOME/docker-box/mount-data/docker-centos/mysql/conf/my.cnf:/etc/my.cnf
+        - $HOME/docker-box/mount-data/docker-centos/mysql/log:/var/log/mysql
+      environment:
+        MYSQL_ROOT_PASSWORD: 123456
+      restart: always
+      container_name: mysql
+
+  php:
+      depends_on:
+        - mysql
+      build: ./php
+      ports:
+        - "9000:9000"
+      links:
+        - "mysql"
+        - "redis"
+      volumes:
+        - $HOME/docker-box/mount-data/docker-centos/php/php.ini:/usr/local/php/etc/php.ini
+        - $HOME/docker-box/mount-data/docker-centos/php/logs/php-fpm.log:/usr/local/php/var/log/php-fpm.log
+        - $HOME/docker-box/mount-data/docker-centos/www:/usr/local/nginx/html
+      restart: always
+      container_name: php
+
+  nginx:
+      depends_on:
+        - php
+      build: ./nginx
+      ports:
+        - "80:80"
+      links:
+        - "php"
+      volumes:
+       - $HOME/docker-box/mount-data/docker-centos/www:/usr/local/nginx/html
+       - $HOME/docker-box/mount-data/docker-centos/nginx/logs/error.log:/usr/local/nginx/logs/error.log
+       - $HOME/docker-box/mount-data/docker-centos/nginx/logs/access.log:/usr/local/nginx/logs/access.log
+       - $HOME/docker-box/mount-data/docker-centos/nginx/conf/nginx.conf:/usr/local/nginx/conf/nginx.conf
+       - $HOME/docker-box/mount-data/docker-centos/nginx/conf/vhost:/usr/local/nginx/conf/vhost
+      restart: always
+      container_name: nginx
