@@ -2,13 +2,13 @@
 
 ### Get
 
-`mkdir -p $HOME/docker/`
-`cd $HOME/docker/`
+`mkdir -p $HOME/docker-box/`
+`cd $HOME/docker-box/`
 `git clone xxx`
 
 ### Use
 
-`cd $HOME/docker/php/`
+`cd $HOME/docker-box/php/`
 `docker run --name php -p 9000:9000 -d php`
 
 挂载目录及配置文件运行

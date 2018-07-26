@@ -2,13 +2,13 @@
 
 ### Get
 
-`mkdir -p $HOME/docker/`
-`cd $HOME/docker/`
+`mkdir -p $HOME/docker-box/`
+`cd $HOME/docker-box/`
 `git clone xxx`
 
 ### Use
 
-`cd $HOME/docker/nxinx/`
+`cd $HOME/docker-box/nxinx/`
 `docker run --name nginx -p 80:80 -d nginx`
 
 挂载目录及配置文件运行

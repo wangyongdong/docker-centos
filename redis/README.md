@@ -2,13 +2,13 @@
 
 ### Get
 
-`mkdir -p $HOME/docker/`
-`cd $HOME/docker/`
+`mkdir -p $HOME/docker-box/`
+`cd $HOME/docker-box/`
 `git clone xxx`
 
 ### Use
 
-`cd $HOME/docker/redis/`
+`cd $HOME/docker-box/redis/`
 `docker run -d --name redis --privileged=true -p 36379:6379 --restart=always -d redis redis-server --appendonly yes --requirepass "123456"`
 
 挂载目录及配置文件运行
