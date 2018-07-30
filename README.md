@@ -10,11 +10,9 @@
     - 自定义挂载目录，确保挂载目录有相应的文件
     
 ### RUN
-
-   - `mkdir -p $HOME/docker-box/ && cd $_`  创建目录并进入
+    
    - `git clone git@github.com:wangyongdong/docker-centos.git` 克隆项目
-   - `mkdir -p $HOME/docker-box/mount-data/docker-centos/ && cp -r $HOME/docker-box/docker-centos/data/* $_` 创建挂载目录，拷贝挂载文件到挂载目录
-   - `cd $HOME/docker-box/docker-centos`
+   - `cd docker-centos`
    - `docker-compose up -d`
     
 ### DEBUG
