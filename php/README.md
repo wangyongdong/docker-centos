@@ -1,22 +1,24 @@
 ## PHP7 Dockerfile Build By CentOS7
 
-### Get
-
-`mkdir -p $HOME/docker-box/`
-`cd $HOME/docker-box/`
-`git clone xxx`
-
 ### Use
 
-`cd $HOME/docker-box/php/`
+`cd $HOME`
+`git clone git@github.com:wangyongdong/docker-centos.git` 克隆项目
+`cd docker-centos/php/`
+`docker build -t php .`   构建镜像
+
+##### 运行
+
+`cd $HOME/docker-centos`
 `docker run --name php -p 9000:9000 -d php`
 
-挂载目录及配置文件运行
+##### 挂载目录及配置文件运行
 
+`cd $HOME/docker-centos`
 `docker run --name php -p 9000:9000 \
- -v $HOME/docker-box/mount-data/docker-centos/php/php.ini:/usr/local/php/etc/php.ini \
- -v $HOME/docker-box/mount-data/docker-centos/php/logs/php-fpm.log:/usr/local/php/var/log/php-fpm.log \
- -v $HOME/docker-box/mount-data/docker-centos/www:/usr/local/nginx/html \
+ -v ./data/php/php.ini:/usr/local/php/etc/php.ini \
+ -v ./data/php/logs/php-fpm.log:/usr/local/php/var/log/php-fpm.log \
+ -v ./data/www:/usr/local/nginx/html \
  --link redis:redis --link mysql:mysql -d php`
 
 > 确保挂载位置有文件，否则挂载失败

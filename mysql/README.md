@@ -1,22 +1,24 @@
 ## MySql Dockerfile Build By CentOS7
 
-### Get
-
-`mkdir -p $HOME/docker-box/`
-`cd $HOME/docker-box/`
-`git clone xxx`
-
 ### Use
 
-`cd $HOME/docker-box/mysql/`
+`cd $HOME`
+`git clone git@github.com:wangyongdong/docker-centos.git` 克隆项目
+`cd docker-centos/mysql/`
+`docker build -t mysql .`   构建镜像
+
+##### 运行
+
+`cd $HOME/docker-centos`
 `docker run --name mysql -p 33306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql`
 
-挂载目录及配置文件运行
+##### 挂载目录及配置文件运行
 
+`cd $HOME/docker-centos`
 `docker run --name mysql -p 33306:3306 -e MYSQL_ROOT_PASSWORD=123456 \
- -v $HOME/docker-box/mount-data/docker-centos/mysql/data:/var/lib/mysql \
- -v $HOME/docker-box/mount-data/docker-centos/mysql/conf/my.cnf:/etc/my.cnf \
- -v $HOME/docker-box/mount-data/docker-centos/mysql/log:/var/log/mysql \
+ -v ./data/mysql/data:/var/lib/mysql \
+ -v ./data/mysql/conf/my.cnf:/etc/my.cnf \
+ -v ./data/mysql/log:/var/log/mysql \
  -d mysql`
 
 > 确保挂载位置有文件，否则挂载失败

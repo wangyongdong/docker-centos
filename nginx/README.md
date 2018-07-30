@@ -1,24 +1,26 @@
 ## NGINX Dockerfile Build By CentOS7
 
-### Get
-
-`mkdir -p $HOME/docker-box/`
-`cd $HOME/docker-box/`
-`git clone xxx`
-
 ### Use
 
-`cd $HOME/docker-box/nxinx/`
+`cd $HOME`
+`git clone git@github.com:wangyongdong/docker-centos.git` 克隆项目
+`cd docker-centos/nginx/`
+`docker build -t nginx .`   构建镜像
+
+##### 运行
+
+`cd $HOME/docker-centos`
 `docker run --name nginx -p 80:80 -d nginx`
 
-挂载目录及配置文件运行
+##### 挂载目录及配置文件运行
 
+`cd $HOME/docker-centos`
 `docker run --name nginx -p 80:80 \
- -v $HOME/docker-box/mount-data/docker-centos/www:/usr/local/nginx/html \
- -v $HOME/docker-box/mount-data/docker-centos/nginx/logs/error.log:/usr/local/nginx/logs/error.log \
- -v $HOME/docker-box/mount-data/docker-centos/nginx/logs/access.log:/usr/local/nginx/logs/access.log \
- -v $HOME/docker-box/mount-data/docker-centos/nginx/conf/nginx.conf:/usr/local/nginx/conf/nginx.conf \
- -v $HOME/docker-box/mount-data/docker-centos/nginx/conf/vhost:/usr/local/nginx/conf/vhost \
+ -v ./data/www:/usr/local/nginx/html \
+ -v ./data/nginx/logs/error.log:/usr/local/nginx/logs/error.log \
+ -v ./data/nginx/logs/access.log:/usr/local/nginx/logs/access.log \
+ -v ./data/nginx/conf/nginx.conf:/usr/local/nginx/conf/nginx.conf \
+ -v ./data/nginx/conf/vhost:/usr/local/nginx/conf/vhost \
  --link php:php -d nginx`
 
 > 确保挂载位置有文件，否则挂载失败

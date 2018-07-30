@@ -5,8 +5,8 @@ services:
       ports:
         - "36379:6379"
       volumes:
-        - $HOME/docker-box/mount-data/docker-centos/redis/data:/data
-        - $HOME/docker-box/mount-data/docker-centos/redis/conf/redis.conf:/usr/local/redis/conf/redis.conf
+        - ./data/redis/data:/data
+        - ./data/redis/conf/redis.conf:/usr/local/redis/conf/redis.conf
       restart: always
       container_name: redis
 
@@ -17,9 +17,9 @@ services:
       ports:
         - "33306:3306"
       volumes:
-        - $HOME/docker-box/mount-data/docker-centos/mysql/data:/var/lib/mysql
-        - $HOME/docker-box/mount-data/docker-centos/mysql/conf/my.cnf:/etc/my.cnf
-        - $HOME/docker-box/mount-data/docker-centos/mysql/log:/var/log/mysql
+        - ./data/mysql/data:/var/lib/mysql
+        - ./data/mysql/conf/my.cnf:/etc/my.cnf
+        - ./data/mysql/log:/var/log/mysql
       environment:
         MYSQL_ROOT_PASSWORD: 123456
       restart: always
@@ -35,9 +35,9 @@ services:
         - "mysql"
         - "redis"
       volumes:
-        - $HOME/docker-box/mount-data/docker-centos/php/php.ini:/usr/local/php/etc/php.ini
-        - $HOME/docker-box/mount-data/docker-centos/php/logs/php-fpm.log:/usr/local/php/var/log/php-fpm.log
-        - $HOME/docker-box/mount-data/docker-centos/www:/usr/local/nginx/html
+        - ./data/php/php.ini:/usr/local/php/etc/php.ini
+        - ./data/php/logs/php-fpm.log:/usr/local/php/var/log/php-fpm.log
+        - ./data/www:/usr/local/nginx/html
       restart: always
       container_name: php
 
@@ -50,10 +50,10 @@ services:
       links:
         - "php"
       volumes:
-       - $HOME/docker-box/mount-data/docker-centos/www:/usr/local/nginx/html
-       - $HOME/docker-box/mount-data/docker-centos/nginx/logs/error.log:/usr/local/nginx/logs/error.log
-       - $HOME/docker-box/mount-data/docker-centos/nginx/logs/access.log:/usr/local/nginx/logs/access.log
-       - $HOME/docker-box/mount-data/docker-centos/nginx/conf/nginx.conf:/usr/local/nginx/conf/nginx.conf
-       - $HOME/docker-box/mount-data/docker-centos/nginx/conf/vhost:/usr/local/nginx/conf/vhost
+       - ./data/www:/usr/local/nginx/html
+       - ./data/nginx/logs/error.log:/usr/local/nginx/logs/error.log
+       - ./data/nginx/logs/access.log:/usr/local/nginx/logs/access.log
+       - ./data/nginx/conf/nginx.conf:/usr/local/nginx/conf/nginx.conf
+       - ./data/nginx/conf/vhost:/usr/local/nginx/conf/vhost
       restart: always
       container_name: nginx
