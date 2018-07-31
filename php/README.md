@@ -16,11 +16,11 @@
 
 `cd $HOME/docker-centos`
 `docker run --name php -p 9000:9000 \
- -v ./data/php/php.ini:/usr/local/php/etc/php.ini \
- -v ./data/php/logs/php-fpm.log:/usr/local/php/var/log/php-fpm.log \
- -v ./data/www:/usr/local/nginx/html \
+ -v $PWD/php/conf/php.ini:/usr/local/php/etc/php.ini \
+ -v $PWD/php/logs/php-fpm.log:/usr/local/php/var/log/php-fpm.log \
+ -v $PWD/www:/usr/local/nginx/html \
  --link redis:redis --link mysql:mysql -d php`
-
+ 
 > 确保挂载位置有文件，否则挂载失败
 
 ### 命令说明

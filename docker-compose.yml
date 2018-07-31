@@ -5,8 +5,8 @@ services:
       ports:
         - "36379:6379"
       volumes:
-        - ./data/redis/data:/data
-        - ./data/redis/conf/redis.conf:/usr/local/redis/conf/redis.conf
+        - ./redis/data:/data
+        - ./redis/conf/redis.conf:/usr/local/redis/conf/redis.conf
       restart: always
       container_name: redis
 
@@ -17,9 +17,9 @@ services:
       ports:
         - "33306:3306"
       volumes:
-        - ./data/mysql/data:/var/lib/mysql
-        - ./data/mysql/conf/my.cnf:/etc/my.cnf
-        - ./data/mysql/log:/var/log/mysql
+        - ./mysql/data:/var/lib/mysql
+        - ./mysql/conf/my.cnf:/etc/my.cnf
+        - ./mysql/log:/var/log/mysql
       environment:
         MYSQL_ROOT_PASSWORD: 123456
       restart: always
@@ -35,9 +35,9 @@ services:
         - "mysql"
         - "redis"
       volumes:
-        - ./data/php/php.ini:/usr/local/php/etc/php.ini
-        - ./data/php/logs/php-fpm.log:/usr/local/php/var/log/php-fpm.log
-        - ./data/www:/usr/local/nginx/html
+        - ./php/php.ini:/usr/local/php/etc/php.ini
+        - ./php/logs/php-fpm.log:/usr/local/php/var/log/php-fpm.log
+        - ./www:/usr/local/nginx/html
       restart: always
       container_name: php
 
@@ -50,10 +50,10 @@ services:
       links:
         - "php"
       volumes:
-       - ./data/www:/usr/local/nginx/html
-       - ./data/nginx/logs/error.log:/usr/local/nginx/logs/error.log
-       - ./data/nginx/logs/access.log:/usr/local/nginx/logs/access.log
-       - ./data/nginx/conf/nginx.conf:/usr/local/nginx/conf/nginx.conf
-       - ./data/nginx/conf/vhost:/usr/local/nginx/conf/vhost
+       - ./www:/usr/local/nginx/html
+       - ./nginx/logs/error.log:/usr/local/nginx/logs/error.log
+       - ./nginx/logs/access.log:/usr/local/nginx/logs/access.log
+       - ./nginx/conf/nginx.conf:/usr/local/nginx/conf/nginx.conf
+       - ./nginx/conf/vhost:/usr/local/nginx/conf/vhost
       restart: always
       container_name: nginx

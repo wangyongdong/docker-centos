@@ -16,8 +16,8 @@
 
 `cd $HOME/docker-centos`
 `docker run -d --name redis --privileged=true -p 36379:6379 \
--v ./data/redis/data:/data \
--v ./data/redis/conf/redis.conf:/usr/local/redis/conf/redis.conf \
+-v $PWD/redis/data:/data \
+-v $PWD/redis/conf/redis.conf:/usr/local/redis/conf/redis.conf \
 --restart=always -d redis redis-server --appendonly yes --requirepass "123456"`
 
 > 确保挂载位置有文件，否则挂载失败

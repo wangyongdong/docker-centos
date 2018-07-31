@@ -7,20 +7,20 @@
 `cd docker-centos/nginx/`
 `docker build -t nginx .`   构建镜像
 
-##### 运行
+#### 运行
 
 `cd $HOME/docker-centos`
 `docker run --name nginx -p 80:80 -d nginx`
 
-##### 挂载目录及配置文件运行
+#### 挂载目录及配置文件运行
 
 `cd $HOME/docker-centos`
 `docker run --name nginx -p 80:80 \
- -v ./data/www:/usr/local/nginx/html \
- -v ./data/nginx/logs/error.log:/usr/local/nginx/logs/error.log \
- -v ./data/nginx/logs/access.log:/usr/local/nginx/logs/access.log \
- -v ./data/nginx/conf/nginx.conf:/usr/local/nginx/conf/nginx.conf \
- -v ./data/nginx/conf/vhost:/usr/local/nginx/conf/vhost \
+ -v $PWD/www:/usr/local/nginx/html \
+ -v $PWD/nginx/logs/error.log:/usr/local/nginx/logs/error.log \
+ -v $PWD/nginx/logs/access.log:/usr/local/nginx/logs/access.log \
+ -v $PWD/nginx/conf/nginx.conf:/usr/local/nginx/conf/nginx.conf \
+ -v $PWD/nginx/conf/vhost:/usr/local/nginx/conf/vhost \
  --link php:php -d nginx`
 
 > 确保挂载位置有文件，否则挂载失败
