@@ -7,7 +7,7 @@
 `cd docker-centos/nginx/`
 `docker build -t nginx .`   构建镜像
 
-#### 运行
+#### 运行 
 
 `cd $HOME/docker-centos`
 `docker run --name nginx -p 80:80 -d nginx`
